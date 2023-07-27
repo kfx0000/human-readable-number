@@ -35,13 +35,4 @@ module.exports = function toReadable (number) {
 
     const twoDigits = n => (n === 0)?'':(((n < 20) || (n % 10 === 0))?numbers[n]:numbers[10 * Math.floor(n / 10)] + ' ' + numbers[n % 10]);
     return (number < 10) ? numbers[number] : ((number < 100) ? twoDigits(number) : numbers[Math.floor(number / 100)] + numbers[number % 100 ? 101:100] + twoDigits(number % 100));
-
-//    if(n === 0) return '';
-//    else if((n < 20) || (n % 10 === 0)) return numbers[n];
-//    else return numbers[10 * Math.floor(n / 10)] + ' ' + numbers[n % 10];
-
-
-//    if(number < 10) return numbers[number];
-//    else if(number < 100) return twoDigits(number);
-//    else if(number < 1000) return numbers[Math.floor(number / 100)] + numbers[number % 100 ? 101:100] + twoDigits(number % 100);
 }
