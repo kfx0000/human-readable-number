@@ -1,48 +1,47 @@
 module.exports = function toReadable (number) {
-    function oneDigit(n) {
-        switch (n) {
-            case 1: return 'one'; break;
-            case 2: return 'two'; break;
-            case 3: return 'three'; break;
-            case 4: return 'four'; break;
-            case 5: return 'five'; break;
-            case 6: return 'six'; break;
-            case 7: return 'seven'; break;
-            case 8: return 'eight'; break;
-            case 9: return 'nine'; break;
-            default: return '';
-        }
+
+    const numbers = {
+        0:  'zero',
+        1:  'one',
+        2:  'two',
+        3:  'three',
+        4:  'four',
+        5:  'five',
+        6:  'six',
+        7:  'seven',
+        8:  'eight',
+        9:  'nine',
+        10: 'ten',
+        11: 'eleven',
+        12: 'twelve',
+        13: 'thirteen',
+        14: 'fourteen',
+        15: 'fifteen',
+        16: 'sixteen',
+        17: 'seventeen',
+        18: 'eighteen',
+        19: 'nineteen',
+        20: 'twenty',
+        30: 'thirty',
+        40: 'forty',
+        50: 'fifty',
+        60: 'sixty',
+        70: 'seventy',
+        80: 'eighty',
+        90: 'ninety',
+        100:' hundred',
+        101:' hundred '
     }
 
-    function twoDigit(n, spc) {
-        let space = spc?' ':'';
-        if(n === 0) return '';
-        else if(n.toString().length == 1) return ' '+oneDigit(n);
-        else switch(n) {
-            case 10: return space+'ten'; break;
-            case 11: return space+'eleven'; break;
-            case 12: return space+'twelve'; break;
-            case 13: return space+'thirteen'; break;
-            case 14: return space+'fourteen'; break;
-            case 15: return space+'fifteen'; break;
-            case 16: return space+'sixteen'; break;
-            case 17: return space+'seventeen'; break;
-            case 18: return space+'eighteen'; break;
-            case 19: return space+'nineteen'; break;
-            case 20: return space+'twenty'; break;
-            case 30: return space+'thirty'; break;
-            case 40: return space+'forty'; break;
-            case 50: return space+'fifty'; break;
-            case 60: return space+'sixty'; break;
-            case 70: return space+'seventy'; break;
-            case 80: return space+'eighty'; break;
-            case 90: return space+'ninety'; break;
-            default: return twoDigit(10*Math.floor(n/10), spc)+' '+oneDigit(n%10);
-        }
-    }
+    const twoDigits = n => (n === 0)?'':(((n < 20) || (n % 10 === 0))?numbers[n]:numbers[10 * Math.floor(n / 10)] + ' ' + numbers[n % 10]);
+    return (number < 10) ? numbers[number] : ((number < 100) ? twoDigits(number) : numbers[Math.floor(number / 100)] + numbers[number % 100 ? 101:100] + twoDigits(number % 100));
 
-    if(number === 0) return 'zero';
-    else if(number.toString().length == 1) return oneDigit(number);
-    else if(number.toString().length == 2) return twoDigit(number, false);
-    else if(number.toString().length == 3) return oneDigit(Math.floor(number/100))+' hundred'+twoDigit(number%100, true);
+//    if(n === 0) return '';
+//    else if((n < 20) || (n % 10 === 0)) return numbers[n];
+//    else return numbers[10 * Math.floor(n / 10)] + ' ' + numbers[n % 10];
+
+
+//    if(number < 10) return numbers[number];
+//    else if(number < 100) return twoDigits(number);
+//    else if(number < 1000) return numbers[Math.floor(number / 100)] + numbers[number % 100 ? 101:100] + twoDigits(number % 100);
 }
